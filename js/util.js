@@ -43,11 +43,11 @@ function Int(s) {
  * 给原生对象添加方法
  */
 document.on = Element.prototype.on = Element.prototype.addEventListener;
-NodeList.prototype.on = function(event, fn) {　　　　
-	[]['forEach'].call(this, function(el) {　　　　　　
-		el.on(event, fn);　　　　
-	});　　　　
-	return this;　　
+NodeList.prototype.on = function(event, fn) {
+	[]['forEach'].call(this, function(el) {
+		el.on(event, fn);
+	});
+	return this;
 };
 document.off = Element.prototype.off = Element.prototype.removeEventListener;
 
@@ -67,6 +67,5 @@ function error(msg) {
  * 2015/3/2 : 简单的理解就是改变运算数的符号并减去1
  *
  *  ~[1,2,3,4,5].indexOf(9) 在这个中，返回值就可以直接if了
- *
- /
+ */
  
