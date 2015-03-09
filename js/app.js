@@ -8,7 +8,7 @@
 
 var cutList = [];
 var canvas = $('canvas')[0];
-var context = canvas.getContext('2d');
+var ctx = canvas.getContext('2d');
 var ctx2 = $('canvas')[1].getContext('2d');
 ! function() {
 	//initialization;
@@ -37,8 +37,8 @@ var ctx2 = $('canvas')[1].getContext('2d');
 			}
 
 
-			context.clearRect(0, 0, canvas.width, canvas.height);
-			context.drawImage(image, 0, 0);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(image, 0, 0);
 
 
 			eDrop(canvas.parentElement.children[0]);
@@ -62,7 +62,7 @@ function demofinish() {
 			w = t.offsetWidth,
 			h = t.offsetHeight;
 
-		var data = context.getImageData(x, y, w, h);
+		var data = ctx.getImageData(x, y, w, h);
 
 		ctx2.putImageData(data, nx, ny);
 

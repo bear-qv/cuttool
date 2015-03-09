@@ -6,24 +6,23 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
-<div class="header">
-    <div class="fr">
-        Cuttool . _. by <a href="http://weibo.com/smalltr" style="color:#333;margin-left:20px;">@qovciu</a>
-    </div>
+<div class="app">
+    <section class="main-header shading">
+    	<div class="depiction">
+    		<h1>Cuttool</h1>
+    		<h2>这是个十分简易的在线图片工具，点下面的<a href="#">UP</a>试试!</h2>
+    	</div>
+    </section>
+    <section class="main-content">
+        <div class="container">
+            <h3>只需要点击下面的按钮，就可以上传你的照片并且进行在线编辑。</h3>
+            <div class="upload">
+                <img src="static/icon-upload.png">
+            </div>           
+        </div>
+        <p>Contact:<a href="mailto:foru.fy@gmail.com">foru.fy@gmail.com</a></p>
+    </section>
 </div>
-<div><input type="file" id="userImage" accept="image/*"></div>
-
-<button onclick="demofinish();">HAHA!</button>
-<div style="position:relative;">
-    <div style="width:50px;height:50px;position:absolute;background:rgba(0,0,0,0.2);"></div>
-    <div style="width:50px;height:50px;position:absolute;background:rgba(0,0,0,0.2);"></div>
-    <canvas id="canvasA" style="position:reluteive">
-        Your Brower can't support the canvas
-    </canvas>
-</div>
-<canvas id="canvasB" width="1000px" height="1000px">
-</canvas>
-
 </body>
 <script type="text/javascript" src="js/util.js"></script>
 <script type="text/javascript" src="js/drop.js"></script>
