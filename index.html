@@ -16,9 +16,11 @@
     <section class="main-content">
         <div class="container">
             <h3>只需要点击下面的按钮，就可以上传你的照片并且进行在线编辑。</h3>
-            <div class="upload">
+            <div class="upload" onclick="this.children[2].click();">
                 <img src="static/icon-upload.png">
-            </div>           
+                <div class="image-depiction">选择文件</div>
+                <input class="hide" type="file" id="upload-image" accept="image/*">
+            </div>
         </div>
         <p>Contact:<a href="mailto:foru.fy@gmail.com">foru.fy@gmail.com</a></p>
     </section>
