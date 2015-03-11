@@ -72,6 +72,7 @@ function Init() {
             var files = $('#workplace-upload')[0].children;
             var file = files[1];
             var wk = $('#workplace')[0];
+            var tb = $('#side-content')[0];
             var h = wk.children[0];
             var canvas = wk.children[2];
             var depiction = $('#image-depiction')[0];
@@ -81,6 +82,8 @@ function Init() {
             depiction.innerHTML = file.files[0].name;
 
             wk.children.hide();
+            tb.children.show();
+
 
 
             canvas.style.display = 'block';

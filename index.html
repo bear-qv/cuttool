@@ -7,13 +7,13 @@
 </head>
 <body>
 <div class="app">
-    <section class="main-header shading">
+    <section id="main-header shading" class="main-header shading">
     	<div class="depiction">
     		<h1>Cuttool</h1>
     		<h2 id="help">这是个十分简易的在线图片裁剪工具，点下面的<a href="#workplace">按钮</a>开始吧!</h2>
     	</div>
     </section>
-    <section class="main-content">
+    <section id="main-content" class="main-content">
         <div id="workplace" class="container">
             <h3>只需要点击下面的按钮，就可以上传你的照片并且进行在线编辑。</h3>
             <div class="upload" id="workplace-upload" onclick="this.children[1].click();">
@@ -26,7 +26,9 @@
         <p>Contact:<a href="mailto:foru.fy@gmail.com">foru.fy@gmail.com</a></p>
     </section>
     <section id="side-content" class="side-content">
-
+        <div id="toolbar" class="toolbar" onclick="$('#workplace-upload')[0].children[1].click();">
+            <img src="static/icon-upload.png" alt="点我上传" >
+        </div>
     </section>
 </div>
 </body>
