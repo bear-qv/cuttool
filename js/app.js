@@ -91,7 +91,7 @@ function Init() {
 
             //屏幕自动下滚
             // 也许，以后做编辑器需要一个这样的跳转函数
-            location.href=location.hostname+location.pathname+'#workplace';
+            location.href=location.origin+location.pathname+'#workplace';
 
             //canvas load image
             var ctx = canvas.getContext('2d');
