@@ -1,4 +1,4 @@
-/*!
+/*
  * @Name ElementDrop 创建一个拖拽元素对象
  * @authors Qv (four.fy@gmail.com)
  * @date    2015-02-09 10:19:19
@@ -8,7 +8,7 @@
 
 function eDrop(obj) {
     return obj.drag = new Drag(obj, {
-        ODD: function (self) {
+        ODD: function(self) {
             self.style.zIndex = ++Drop.zIndex;
             Drop.tensile.poss(self);
         }
@@ -18,8 +18,7 @@ function eDrop(obj) {
 
 //#region Tensile 
 //缩放裁剪对象
-function Tensile() {
-};
+function Tensile() {};
 Tensile.prototype = {
 
     e: null, //be tensiled element
@@ -35,7 +34,7 @@ Tensile.prototype = {
     defaultStyle: 'width:6px;height:6px;position:absolute;background-color:blue;cursor:move',
 
     //初始化函数把8个锚点实例化,后面大概是要给锚点加一些坏坏的东西啦。
-    init: function () {
+    init: function() {
         for (var i = 0; i < 3; i++) {
             for (var j = 0; j < 3; j++) {
                 if (i !== 1 || j !== 1) {
@@ -50,20 +49,20 @@ Tensile.prototype = {
         }
         return this;
     },
-//    //参数 object
-//    check: function (obj) {
-//        var objStyle = obj.style;
-//        var mA = this.minArea;
-//        (Int(objStyle.width) < mA) && (objStyle.width = mA + 'px');
-//        (Int(objStyle.height) < mA) && (objStyle.height = mA + 'px');
-//        return obj;
-//    },
+    //    //参数 object
+    //    check: function (obj) {
+    //        var objStyle = obj.style;
+    //        var mA = this.minArea;
+    //        (Int(objStyle.width) < mA) && (objStyle.width = mA + 'px');
+    //        (Int(objStyle.height) < mA) && (objStyle.height = mA + 'px');
+    //        return obj;
+    //    },
     //啊啊啊啊，附体了。找到要缩放的元素附体啦
     //参数 object
     //(0,0) (0,1) (0,2)
     //(1,0)       (1,2)
     //(2,0) (2,1) (2,2)
-    poss: function (obj) {
+    poss: function(obj) {
         if (!obj.nodeName) {
             error('the element is Null.');
         } else {
@@ -84,9 +83,8 @@ Tensile.prototype = {
         }
     },
     CB: {
-        ODD: function (self) {
-        },
-        ODM: function (self) {
+        ODD: function(self) {},
+        ODM: function(self) {
             var parStyle = self.parentElement.style;
             var sStyle = self.style;
             var coordinate = self.id.split(':')[1];
@@ -100,10 +98,11 @@ Tensile.prototype = {
             var bt = Int(parStyle.top);
 
             var mA = Drop.tensile.minArea;
-
+            //linewidth
+            var lw = 2 * Int(parStyle.borderWidth);
 
             if (y === 0) {
-                var w = Int(parStyle.width) - Int(sStyle.left) - 6 ;
+                var w = Int(parStyle.width) - Int(sStyle.left) - 6;
                 if (w <= mA) {
                     parStyle.left = bl + bw - mA + 'px';
                     parStyle.width = mA + 'px';
@@ -113,12 +112,12 @@ Tensile.prototype = {
                 }
             }
             if (y === 2) {
-                parStyle.width = Int(sStyle.left) + 'px';
+                parStyle.width = Int(sStyle.left) - lw + 'px';
             }
 
 
             if (x === 0) {
-                var h = Int(parStyle.height) - Int(sStyle.top) - 6 ;
+                var h = Int(parStyle.height) - Int(sStyle.top) - 6;
                 if (h <= mA) {
                     parStyle.top = bt + bh - mA + 'px';
                     parStyle.height = mA + 'px';
@@ -128,7 +127,7 @@ Tensile.prototype = {
                 }
             }
             if (x === 2) {
-                parStyle.height = Int(sStyle.top) + 'px';
+                parStyle.height = Int(sStyle.top) - lw + 'px';
             }
 
             // hehe
@@ -168,7 +167,7 @@ Drag.prototype = {
     CB: {},
     //拖拽对象初始化函数，给拖拽对象加拖拽的基本事件
     //Initialization the Drag Object
-    init: function () {
+    init: function() {
         var e = this.element;
         if (!e.nodeName) {
             error('the element is Null.');
@@ -178,7 +177,7 @@ Drag.prototype = {
         e.Drag = this;
         return e;
     },
-    ODM: function () {
+    ODM: function() {
 
         var e = e || event; //鼠标事件对象
         var self = Drop.onDrag;
@@ -193,8 +192,7 @@ Drag.prototype = {
         var lx = Int(self.style.left) + e.movementX; //
         var ly = Int(self.style.top) + e.movementY;
 
-        //log(e.movementX);
-
+        log('c:' + e.movementX);
 
         if (Drag.free) {
             self.style.left = lx + 'px';
@@ -215,7 +213,7 @@ Drag.prototype = {
 
         return false;
     },
-    ODU: function () {
+    ODU: function() {
         var self = Drop.onDrag;
         var Drag = self.Drag;
 
@@ -229,7 +227,7 @@ Drag.prototype = {
         return false;
     },
     //开始拖拽动作触发的事件
-    ODD: function () {
+    ODD: function() {
         var e = e || event; //鼠标事件对象
         e.stopPropagation();
 
@@ -237,8 +235,8 @@ Drag.prototype = {
 
         //保存鼠标坐标
         //log(4);
-        this.ox = e.pageX - e.offsetX;
-        this.oy = e.pageY - e.offsetY;
+        //this.ox = e.pageX - e.offsetX;
+        //this.oy = e.pageY - e.offsetY;
 
         Drop.onDrag = this;
 
@@ -247,7 +245,6 @@ Drag.prototype = {
 
         //拖拽事件结束
         Drop.context.on('mouseup', Drag.ODU);
-        ;
 
 
         (Drag.CB.ODD) && (Drag.CB.ODD(this));
