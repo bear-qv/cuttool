@@ -51,6 +51,7 @@ html,body,.app{width: 100%;height: 100%;font-family: "微软雅黑";}
 	text-align: center;
 }
 .main-content .container {
+    position: relative;
 	width: 600px;
 	height: 360px;
 	margin: 0px auto;	
@@ -133,6 +134,9 @@ html,body,.app{width: 100%;height: 100%;font-family: "微软雅黑";}
     width: 80px;
     height: 80px;
     vertical-align:middle;
+}
+.kuan{
+    width:50px;height:50px;position:absolute;background:rgba(0,0,0,0.2);display: none;
 }
 
 

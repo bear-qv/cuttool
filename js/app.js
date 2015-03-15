@@ -51,6 +51,7 @@
 
 }();
 
+var onmove;
 function Init() {
     //initialization;
     var imgfile = $('#upload-image')[0];
@@ -78,12 +79,11 @@ function Init() {
             var depiction = $('#image-depiction')[0];
             var help = $('#help')[0];
 
-            help.innerHTML = '尝试用鼠标在上面拖拖看。';
+            help.innerHTML = '尝试用鼠标在图片上拖拖看。';
             depiction.innerHTML = file.files[0].name;
 
             wk.children.hide();
             tb.children.show();
-
 
 
             canvas.style.display = 'block';
@@ -94,17 +94,41 @@ function Init() {
 
             //屏幕自动下滚
             // 也许，以后做编辑器需要一个这样的跳转函数
-            location.href=location.origin+location.pathname+'#workplace';
+            location.href = location.origin + location.pathname + '#workplace';
 
             //canvas load image
             var ctx = canvas.getContext('2d');
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.drawImage(this, 0, 0);
 
+            wk.on('mousedown', function (e) {
+                e = e || event;
+                var d = document.createElement('div');
+                d.style.cssText = 'position:absolute;width:0px;height:0px;border:1px solid #ccc;top:' + (e.pageY - this.offsetTop) + 'px;left:' + (e.pageX - this.offsetLeft) + 'px';
+                onmove = d;
+                onmove.x = e.pageX;
+                onmove.y = e.pageY;
+                this.appendChild(d);
+                document.on('mousemove', function (e) {
+                    e = e || event;
+                    onmove.style.width = e.pageX - onmove.x + 'px';
+                    onmove.style.height = e.pageY - onmove.y + 'px';
+                    return false;
+                });
+                document.on('mouseup', function (e) {
+                    document.onmousemove = null;
+                    document.onmouseup = null;
+                    eDrop(onmove);
+                    onmove = null;
+                })
+
+
+                return false;
+            })
+
 
         }
     }
-
 }
 
 function demofinish() {
@@ -123,3 +147,6 @@ function demofinish() {
         nx += w + 2;
     }
 }
+
+//workplace-image
+//图片的编辑动作
