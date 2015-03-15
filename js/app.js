@@ -148,5 +148,3 @@ function demofinish() {
     }
 }
 
-//workplace-image
-//图片的编辑动作
