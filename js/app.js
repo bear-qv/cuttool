@@ -86,7 +86,6 @@ function Init() {
             wk.children.hide();
             tb.children.show();
 
-
             canvas.style.display = 'block';
             canvas.width = this.width;
             canvas.height = this.height;
@@ -102,35 +101,99 @@ function Init() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.drawImage(this, 0, 0);
 
-            wk.on('mousedown', function(e) {
-                e = e || event;
-                var d = document.createElement('div');
-                d.style.cssText = 'position:absolute;width:0px;height:0px;border:1px solid #ccc;top:' + (e.pageY - this.offsetTop) + 'px;left:' + (e.pageX - this.offsetLeft) + 'px';
-                onmove = d;
-                onmove.x = e.pageX;
-                onmove.y = e.pageY;
-                this.appendChild(d);
-                document.on('mousemove', function(e) {
-                    e = e || event;
-                    onmove.style.width = e.pageX - onmove.x + 'px';
-                    onmove.style.height = e.pageY - onmove.y + 'px';
-                    return false;
-                });
-                document.on('mouseup', function(e) {
-                    document.onmousemove = null;
-                    document.onmouseup = null;
-                    eDrop(onmove);
-                    onmove = null;
-                })
-
-
-                return false;
+            //鼠标拖动生成裁剪选择框
+            /*wk.on('mousedown', function(e) {
+                flag = true;
+                try {
+                    var evt = window.event || e;
+                    var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+                    var scrollLeft = document.body.scrollLeft || document.documentElement.scrollLeft;
+                    startX = evt.clientX + scrollLeft;
+                    startY = evt.clientY + scrollTop;
+                    index++;
+                    var d = document.createElement('d');
+                    d.style.cssText = 'position:absolute;background:rgba(0,0,0,0.2);width:0px;height:0px;border:1px dashed #ccc;top:' + (startY) + 'px;left:' + (startX) + 'px';
+                    this.appendChild(d);
+            } catch (e) {
+                alert("a");
+            }
             });
+            wk.on('mouseup', function(e) {
+                try {
+                document.body.removeChild($(wId + index));
+                var d = document.createElement('d');
+                d.className = "retc";
+                d.style.Left = retcLeft;
+                d.style.Top = retcTop;
+                d.style.width = retcWidth;
+                d.style.height = retcHeight;
+                this.appendChild(d);
+                } catch (e) {
+                    alert("b");
+                }
+                flag = false;
+            });
+            wk.on('mousemove', function(e){
+                if (flag) {
+                    try {
+                        var evt = window.event || e;
+                        var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+                        var scrollLeft = document.body.scrollLeft || document.documentElement.scrollLeft;
+                        retcLeft = (startX - evt.clientX - scrollLeft > 0 ? evt.clientX + scrollLeft : startX) + "px";
+                        retcTop = (startY - evt.clientY - scrollTop > 0 ? evt.clientY + scrollTop : startY) + "px";
+                        retcHeight = Math.abs(startY - evt.clientY - scrollTop) + "px";
+                        retcWidth = Math.abs(startX - evt.clientX - scrollLeft) + "px";
+                        $(wId + index).style.Left = retcLeft;
+                        $(wId + index).style.Top = retcTop;
+                        $(wId + index).style.width = retcWidth;
+                        $(wId + index).style.height = retcHeight;
+                    } catch (e) {
+                        //alert("c");
+                    }
+                }
+            });
+            var $ = function (id) {
+                return document.getElementById(id);
+            }*/
+            wk.on('mousedown', function(e) {
+                 e = e || event;
+                 var d = document.createElement('div');
+                 d.style.cssText = 'position:absolute;background:rgba(0,0,0,0.2);width:0px;height:0px;border:1px dashed #ccc;top:' + (e.pageY - this.offsetTop) + 'px;left:' + (e.pageX - this.offsetLeft) + 'px';
+                 onmove = d;
+                 onmove.x = e.pageX;
+                 onmove.y = e.pageY;
+                 this.appendChild(d);
+                 document.on('mousemove', function(e) {
+                     e = e || event;
+                     //var a= Math.abs(e.pageX - onmove.x + 'px');
+                     onmove.style.width = e.pageX - onmove.x + 'px';
+                     onmove.style.height = e.pageY - onmove.y + 'px';
+                     return false;
+                 });
+                 document.on('mouseup', function(e) {
+                     document.onmousemove = null;
+                     document.onmouseup = null;
+                     eDrop(onmove);
+                     onmove = null;
+                 })
+                 return false;
+             });
         }
     }
 }
 
+//裁剪生成图片
+
 function demofinish() {
+    var gt = unescape('%3e');
+    var popup = null;
+    var over = "Launch Pop-up Navigator";
+    popup = window.open('harvest.html','popupnav', "height=768,width=1366,top=200,left=200;toolbar=no,menubar=no,scrollbars=no,resizable=auto, location=no,status=no");
+    if (popup != null) {
+        if (popup.opener == null) {
+            popup.opener = self; }
+        popup.location.href = 'harvest.html';
+    }
     var nx = 0;
     var ny = 0;
     for (var i = 0, t; t = cutList[i]; i++) {
